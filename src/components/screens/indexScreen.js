@@ -43,8 +43,14 @@ const IndexScreen = ({ navigation }) => {
       </Tab>
 
       <TabView value={index} onChange={setIndex}>
-        <TabView.Item style={{ backgroundColor: "red", width: "100%" }}>
-          <Text h1>Ressssceasdasdnt</Text>
+        <TabView.Item
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <MovieContainer navigation={navigation} />
         </TabView.Item>
 
         <TabView.Item style={{ backgroundColor: "blue", width: "100%" }}>
