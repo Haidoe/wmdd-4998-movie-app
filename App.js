@@ -1,24 +1,28 @@
-import { ThemeProvider, createTheme, darkColors, lightColors } from '@rneui/themed';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import AppStack from './src/components/stacks/AppStack';
-import { Text } from 'react-native';
-
+import {
+  ThemeProvider,
+  createTheme,
+  darkColors,
+  lightColors,
+} from "@rneui/themed";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import AppStack from "./src/components/stacks/AppStack";
+import { Text } from "react-native";
 
 const theme = createTheme({
   lightColors: {
     ...Platform.select({
       default: lightColors.platform.android,
       ios: lightColors.platform.ios,
-    })
+    }),
   },
   darkColors: {
     ...Platform.select({
       default: darkColors.platform.android,
-      ios: darkColors.platform.ios
-    })
+      ios: darkColors.platform.ios,
+    }),
   },
-  mode: 'light'
+  mode: "light",
 });
 
 const App = () => {
@@ -30,5 +34,5 @@ const App = () => {
       </SafeAreaProvider>
     </ThemeProvider>
   );
-}
-export default App
+};
+export default App;
