@@ -22,6 +22,28 @@ export const getMovies = async (query = "popular") => {
   }
 };
 
+export const getTvShows = async (query = "on_the_air") => {
+  try {
+    const url = `${BASE_MOVIE}/tv/${query}?language=en-US&page=1`;
+
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${MOVIE_ACCESS_TOKEN}`,
+      },
+    };
+
+    const response = await fetch(url, options);
+
+    const result = await response.json();
+
+    return result.results ?? [];
+  } catch (error) {
+    return [];
+  }
+};
+
 // Search TV
 // const url = 'https://api.themoviedb.org/3/search/tv?query=Super&include_adult=false&language=en-US&page=1';
 // const options = {

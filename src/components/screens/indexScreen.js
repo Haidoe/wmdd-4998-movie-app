@@ -1,5 +1,6 @@
 import { View, Text } from "react-native";
 import MovieContainer from "../containers/MovieContainer";
+import TvShowsContainer from "../containers/TvShowsContainer";
 import { Tab } from "@rneui/themed";
 import { TabView } from "@rneui/base";
 import { useState } from "react";
@@ -58,7 +59,7 @@ const IndexScreen = ({ navigation }) => {
         </TabView.Item>
 
         <TabView.Item style={{ backgroundColor: "green", width: "100%" }}>
-          <Text h1>Cart</Text>
+          <TvShowsContainer navigation={navigation} />
         </TabView.Item>
       </TabView>
     </>
