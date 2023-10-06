@@ -44,11 +44,13 @@ const TvShowsContainer = () => {
 
   return (
     <View style={styles.container}>
-      <Dropdown
-        onChange={fetchTvShows}
-        itemList={selectItems}
-        defaultSelectedKey="popular"
-      />
+      <View style={styles.dropdownContainer}>
+        <Dropdown
+          onChange={fetchTvShows}
+          itemList={selectItems}
+          defaultSelectedKey="popular"
+        />
+      </View>
 
       {isLoading ? <Loading /> : <ItemList data={tvShows} type="tv" />}
     </View>
@@ -62,6 +64,11 @@ const styles = StyleSheet.create({
     gap: 16,
     padding: 16,
     paddingBottom: 60,
+  },
+  dropdownContainer: {
+    padding: 8,
+    paddingLeft: 24,
+    paddingRight: 24,
   },
 });
 

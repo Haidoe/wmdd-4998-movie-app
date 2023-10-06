@@ -79,15 +79,19 @@ const Dropdown = ({ onChange, itemList, defaultSelectedKey }) => {
 
 const styles = StyleSheet.create({
   dropdownContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    // display: "flex",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   button: {
     backgroundColor: "white",
     borderColor: "gray",
     borderStyle: "solid",
     borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
   },
   buttonTitle: {
     marginRight: 24,
@@ -95,3 +99,11 @@ const styles = StyleSheet.create({
 });
 
 export default Dropdown;
+//Todo -- Search
+/**
+ *
+ * Initial Blank State
+ *
+ * Redirect to single stack
+ *
+ */

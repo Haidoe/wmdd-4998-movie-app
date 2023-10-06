@@ -4,6 +4,7 @@ import { getSearchItems } from "../../services";
 import { useEffect, useState } from "react";
 import ItemList from "../list/ItemList";
 import Loading from "../Loading";
+import { Button, SearchBar } from "@rneui/themed";
 
 const SearchContainer = () => {
   const [searchedItems, setSearchedItems] = useState([]);
@@ -41,11 +42,30 @@ const SearchContainer = () => {
 
   return (
     <View style={styles.container}>
-      <Dropdown
-        onChange={fetchSearchItems}
-        itemList={selectItems}
-        defaultSelectedKey="multi"
-      />
+      <View style={styles.searchContainer}>
+        <Text style={{ paddingLeft: 8 }}>
+          Search Movie/TV Show Name
+          <Text style={{ color: "red" }}>*</Text>
+        </Text>
+        <SearchBar containerStyle={styles.searchBar} />
+      </View>
+
+      <View style={styles.dropdownContainer}>
+        <Text>
+          Choose Search Type <Text style={{ color: "red" }}>*</Text>
+        </Text>
+
+        <View style={styles.dropdownMeta}>
+          <View style={{ flex: 1 }}>
+            <Dropdown
+              onChange={fetchSearchItems}
+              itemList={selectItems}
+              defaultSelectedKey="multi"
+            />
+          </View>
+          <Button> Search </Button>
+        </View>
+      </View>
 
       {isLoading ? (
         <Loading />
@@ -63,6 +83,31 @@ const styles = StyleSheet.create({
     gap: 16,
     padding: 16,
     paddingBottom: 60,
+  },
+
+  searchContainer: {
+    padding: 16,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingBottom: 0,
+  },
+
+  searchBar: {
+    backgroundColor: "transparent",
+    borderBottomColor: "transparent",
+    borderTopColor: "transparent",
+  },
+
+  dropdownContainer: {
+    paddingLeft: 24,
+    paddingRight: 24,
+  },
+
+  dropdownMeta: {
+    marginTop: 8,
+    display: "flex",
+    flexDirection: "row",
+    gap: 8,
   },
 });
 
