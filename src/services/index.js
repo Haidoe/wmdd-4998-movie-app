@@ -60,3 +60,22 @@ export const getSearchItems = async (type = "multi", query) => {
     return [];
   }
 };
+
+export const getMovieDetails = async (id) => {
+  try {
+    const url = `${BASE_MOVIE}/movie/${id}?language=en-US`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    };
+
+    const response = await fetch(url, options);
+
+    const result = await response.json();
+
+    return result;
+  } catch (error) {}
+};
