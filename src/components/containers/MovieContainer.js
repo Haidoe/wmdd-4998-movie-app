@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Dropdown from "../dropdown";
 import { getMovies } from "../../services";
 import { useEffect, useState } from "react";
-import MovieList from "../list/MovieList";
+import ItemList from "../list/ItemList";
 
 const MovieContainer = () => {
   const [movies, setMovies] = useState([]);
@@ -54,7 +54,7 @@ const MovieContainer = () => {
           <Text> Loading... </Text>
         </View>
       ) : (
-        <MovieList movies={movies} />
+        <ItemList data={movies} />
       )}
     </View>
   );

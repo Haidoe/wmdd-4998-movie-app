@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Dropdown from "../dropdown";
 import { getTvShows } from "../../services";
 import { useEffect, useState } from "react";
-import MovieList from "../list/MovieList";
+import ItemList from "../list/ItemList";
 
 const TvShowsContainer = () => {
   const [tvShows, setTvShows] = useState([]);
@@ -54,7 +54,7 @@ const TvShowsContainer = () => {
           <Text> Loading... </Text>
         </View>
       ) : (
-        <MovieList movies={tvShows} />
+        <ItemList data={tvShows} type="tv" />
       )}
     </View>
   );

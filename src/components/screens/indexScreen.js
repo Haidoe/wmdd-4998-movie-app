@@ -58,7 +58,9 @@ const IndexScreen = ({ navigation }) => {
           <Text h1>Favorsite</Text>
         </TabView.Item>
 
-        <TabView.Item style={{ backgroundColor: "green", width: "100%" }}>
+        <TabView.Item
+          style={{ width: "100%", display: "flex", flexDirection: "column" }}
+        >
           <TvShowsContainer navigation={navigation} />
         </TabView.Item>
       </TabView>
