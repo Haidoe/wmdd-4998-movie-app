@@ -13,12 +13,6 @@ import { Image } from "@rneui/themed";
 const SingleItemScreen = ({ navigation, route }) => {
   const { id, title, type } = route.params;
 
-  //Update the title of the screen
-  navigation.setOptions({
-    title,
-    headerBackTitle: "Back to Screen",
-  });
-
   const [details, setDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,6 +28,12 @@ const SingleItemScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     fetchDetail(id);
+
+    //Update the title of the screen
+    navigation.setOptions({
+      title,
+      headerBackTitle: "Back to Screen",
+    });
   }, []);
 
   return (
