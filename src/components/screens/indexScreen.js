@@ -58,7 +58,7 @@ const IndexScreen = ({ navigation }) => {
         <TabView.Item
           style={{ width: "100%", display: "flex", flexDirection: "column" }}
         >
-          <SearchContainer />
+          <SearchContainer navigation={navigation} />
         </TabView.Item>
 
         <TabView.Item

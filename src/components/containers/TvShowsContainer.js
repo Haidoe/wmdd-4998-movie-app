@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ItemList from "../list/ItemList";
 import Loading from "../Loading";
 
-const TvShowsContainer = () => {
+const TvShowsContainer = ({ navigation }) => {
   const [tvShows, setTvShows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,7 +52,11 @@ const TvShowsContainer = () => {
         />
       </View>
 
-      {isLoading ? <Loading /> : <ItemList data={tvShows} type="tv" />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ItemList data={tvShows} type="tv" navigation={navigation} />
+      )}
     </View>
   );
 };

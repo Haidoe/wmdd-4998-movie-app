@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 import Item from "../listItems/Item";
 import { Text } from "@rneui/themed";
 
-const ItemList = ({ data }) => {
+const ItemList = ({ data, navigation }) => {
   return (
     <FlatList
       data={data}
@@ -14,7 +14,7 @@ const ItemList = ({ data }) => {
           </Text>
         </View>
       )}
-      renderItem={({ item }) => <Item {...item} />}
+      renderItem={({ item }) => <Item {...item} navigation={navigation} />}
     />
   );
 };

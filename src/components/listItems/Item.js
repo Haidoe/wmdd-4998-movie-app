@@ -29,6 +29,12 @@ const Item = (props) => {
             backgroundColor: "#31adcd",
           }}
           titleStyle={{ fontSize: 14 }}
+          onPress={() => {
+            props.navigation.navigate("Details", {
+              id: props.id,
+              title: props.title ?? props.name,
+            });
+          }}
         />
       </View>
     </View>

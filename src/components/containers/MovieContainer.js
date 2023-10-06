@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ItemList from "../list/ItemList";
 import Loading from "../Loading";
 
-const MovieContainer = () => {
+const MovieContainer = ({ navigation }) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,7 +52,11 @@ const MovieContainer = () => {
         />
       </View>
 
-      {isLoading ? <Loading /> : <ItemList data={movies} />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ItemList data={movies} navigation={navigation} />
+      )}
     </View>
   );
 };

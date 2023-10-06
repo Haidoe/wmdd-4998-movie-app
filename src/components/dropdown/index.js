@@ -1,4 +1,4 @@
-import { Modal, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useState } from "react";
 import { BottomSheet, Button, ListItem } from "@rneui/themed";

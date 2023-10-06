@@ -6,7 +6,7 @@ import ItemList from "../list/ItemList";
 import Loading from "../Loading";
 import { Button, SearchBar } from "@rneui/themed";
 
-const SearchContainer = () => {
+const SearchContainer = ({ navigation }) => {
   //This is to display initiate search message
   const [hasSearched, setHasSearched] = useState(false);
 
@@ -101,7 +101,7 @@ const SearchContainer = () => {
       ) : isLoading ? (
         <Loading />
       ) : (
-        <ItemList data={searchedItems} type="search" />
+        <ItemList data={searchedItems} type="search" navigation={navigation} />
       )}
     </View>
   );
