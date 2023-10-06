@@ -21,7 +21,9 @@ const Item = (props) => {
 
         <Text style={{ fontSize: 12 }}>Popularity: {props.popularity}</Text>
 
-        <Text style={{ fontSize: 12 }}>Release Date: {props.release_date}</Text>
+        <Text style={{ fontSize: 12 }}>
+          Release Date: {props.release_date ?? props.first_air_date}
+        </Text>
 
         <Button
           title="More Details"
@@ -33,6 +35,7 @@ const Item = (props) => {
             props.navigation.navigate("Details", {
               id: props.id,
               title: props.title ?? props.name,
+              type: props.title ? "movie" : "tv",
             });
           }}
         />

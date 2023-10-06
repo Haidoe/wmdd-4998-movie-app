@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { getMovieDetails } from "../../services";
+import { getMovieDetails, getTvDetails } from "../../services";
 import Loading from "../Loading";
 import { Image } from "@rneui/themed";
 
 const SingleItemScreen = ({ navigation, route }) => {
-  const { id, title } = route.params;
+  const { id, title, type } = route.params;
 
   //Update the title of the screen
   navigation.setOptions({
@@ -13,15 +13,20 @@ const SingleItemScreen = ({ navigation, route }) => {
     headerBackTitle: "Back to Sales",
   });
 
-  const [movieDetails, setMovieDetails] = useState(null);
+  const [details, setDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchDetail = async () => {
     setIsLoading(true);
-    const details = await getMovieDetails(id);
-    setMovieDetails(details);
+
+    let details =
+      type === "movie" ? await getMovieDetails(id) : await getTvDetails(id);
+
+    setDetails(details);
     setIsLoading(false);
   };
+
+  console.log(">>", route.params);
 
   useEffect(() => {
     fetchDetail(id);
@@ -42,23 +47,23 @@ const SingleItemScreen = ({ navigation, route }) => {
               fontSize: 24,
             }}
           >
-            {movieDetails.title ?? movieDetails.name}
+            {details.title ?? details.name}
           </Text>
 
           <View style={styles.imgContainer}>
             <Image
               source={{
-                uri: `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`,
+                uri: `https://image.tmdb.org/t/p/w500${details.poster_path}`,
               }}
               style={{ width: 300, height: 300 }}
             />
           </View>
 
-          <Text style={styles.textContainer}>{movieDetails.overview}</Text>
+          <Text style={styles.textContainer}>{details.overview}</Text>
 
           <Text style={{ textAlign: "center", marginTop: 16 }}>
-            Popularity: {movieDetails.popularity} | Release Date:{" "}
-            {movieDetails.release_date}
+            Popularity: {details.popularity} | Release Date:{" "}
+            {details.release_date ?? details.first_air_date}
           </Text>
         </View>
       )}
