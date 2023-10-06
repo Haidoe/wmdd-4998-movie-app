@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  ScrollViewBase,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { getMovieDetails, getTvDetails } from "../../services";
 import Loading from "../Loading";
 import { Image } from "@rneui/themed";
@@ -10,7 +16,7 @@ const SingleItemScreen = ({ navigation, route }) => {
   //Update the title of the screen
   navigation.setOptions({
     title,
-    headerBackTitle: "Back to Sales",
+    headerBackTitle: "Back to Screen",
   });
 
   const [details, setDetails] = useState(null);
@@ -26,8 +32,6 @@ const SingleItemScreen = ({ navigation, route }) => {
     setIsLoading(false);
   };
 
-  console.log(">>", route.params);
-
   useEffect(() => {
     fetchDetail(id);
   }, []);
@@ -37,35 +41,37 @@ const SingleItemScreen = ({ navigation, route }) => {
       {isLoading ? (
         <Loading />
       ) : (
-        <View style={styles.container}>
-          <Text
-            style={{
-              textAlign: "center",
-              marginTop: 36,
-              marginBottom: 16,
-              fontWeight: "bold",
-              fontSize: 24,
-            }}
-          >
-            {details.title ?? details.name}
-          </Text>
-
-          <View style={styles.imgContainer}>
-            <Image
-              source={{
-                uri: `https://image.tmdb.org/t/p/w500${details.poster_path}`,
+        <ScrollView>
+          <View style={styles.container}>
+            <Text
+              style={{
+                textAlign: "center",
+                marginTop: 36,
+                marginBottom: 16,
+                fontWeight: "bold",
+                fontSize: 24,
               }}
-              style={{ width: 300, height: 300 }}
-            />
+            >
+              {details.title ?? details.name}
+            </Text>
+
+            <View style={styles.imgContainer}>
+              <Image
+                source={{
+                  uri: `https://image.tmdb.org/t/p/w500${details.poster_path}`,
+                }}
+                style={{ width: 300, height: 300 }}
+              />
+            </View>
+
+            <Text style={styles.textContainer}>{details.overview}</Text>
+
+            <Text style={{ textAlign: "center", marginTop: 16 }}>
+              Popularity: {details.popularity} | Release Date:{" "}
+              {details.release_date ?? details.first_air_date}
+            </Text>
           </View>
-
-          <Text style={styles.textContainer}>{details.overview}</Text>
-
-          <Text style={{ textAlign: "center", marginTop: 16 }}>
-            Popularity: {details.popularity} | Release Date:{" "}
-            {details.release_date ?? details.first_air_date}
-          </Text>
-        </View>
+        </ScrollView>
       )}
     </View>
   );
