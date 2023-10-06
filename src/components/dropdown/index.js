@@ -45,6 +45,25 @@ const Dropdown = ({ onChange, itemList, defaultSelectedKey }) => {
             paddingTop: 32,
           }}
         >
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+              flexDirection: "row",
+              marginBottom: 8,
+            }}
+          >
+            <View
+              style={{
+                width: 50,
+                height: 6,
+                backgroundColor: "lightGray",
+                borderRadius: 16,
+              }}
+            />
+          </View>
+
           {list.map((l, i) => (
             <ListItem
               key={i}
