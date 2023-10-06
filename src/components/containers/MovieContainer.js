@@ -8,6 +8,25 @@ const MovieContainer = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const selectItems = [
+    {
+      title: "Now Playing",
+      key: "now_playing",
+    },
+    {
+      title: "Popular",
+      key: "popular",
+    },
+    {
+      title: "Top Rated",
+      key: "top_rated",
+    },
+    {
+      title: "Upcoming",
+      key: "upcoming",
+    },
+  ];
+
   const fetchMovies = async (query) => {
     setIsLoading(true);
     const movies = await getMovies(query ?? "popular");
@@ -24,7 +43,11 @@ const MovieContainer = () => {
 
   return (
     <View style={styles.container}>
-      <Dropdown onChange={fetchMovies} />
+      <Dropdown
+        onChange={fetchMovies}
+        itemList={selectItems}
+        defaultSelectedKey="popular"
+      />
 
       {isLoading ? (
         <View>

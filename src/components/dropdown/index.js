@@ -3,46 +3,26 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useState } from "react";
 import { BottomSheet, Button, ListItem } from "@rneui/themed";
 
-const Dropdown = ({ onChange }) => {
+const Dropdown = ({ onChange, itemList, defaultSelectedKey }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const [selected, setSelected] = useState({
-    title: "Popular",
-    key: "popular",
-  });
+  const selectedObject = itemList.find(
+    (item) => item.key === defaultSelectedKey
+  );
 
-  const list = [
-    {
-      title: "Now Playing",
-      key: "now_playing",
-      onPress: () => handleOnPress("now_playing"),
-    },
-    {
-      title: "Popular",
-      key: "popular",
-      onPress: () => handleOnPress("popular"),
-    },
-    {
-      title: "Top Rated",
-      key: "top_rated",
-      onPress: () => handleOnPress("top_rated"),
-    },
-    {
-      title: "Upcoming",
-      key: "upcoming",
-      onPress: () => handleOnPress("upcoming"),
-    },
-  ];
+  const [selected, setSelected] = useState(selectedObject);
 
   const handleOnPress = (selected) => {
     setIsVisible(false);
-
     const selectedObj = list.find((l) => l.key === selected);
-
     setSelected(selectedObj);
-
     onChange(selected);
   };
+
+  const list = itemList.map((item) => ({
+    ...item,
+    onPress: () => handleOnPress(item.key),
+  }));
 
   return (
     <>
