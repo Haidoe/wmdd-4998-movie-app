@@ -7,8 +7,20 @@ import Loading from "../Loading";
 import { Button, SearchBar } from "@rneui/themed";
 
 const SearchContainer = () => {
+  //This is to display initiate search message
+  const [hasSearched, setHasSearched] = useState(false);
+
+  //This is to store the search query
+  const [searchQuery, setSearchQuery] = useState("");
+
+  //This is to store the search results (movies/tv shows)
   const [searchedItems, setSearchedItems] = useState([]);
+
+  //This is to display loading indicator
   const [isLoading, setIsLoading] = useState(false);
+
+  //This
+  const [selectedType, setSelectedType] = useState("multi");
 
   const selectItems = [
     {
@@ -25,20 +37,20 @@ const SearchContainer = () => {
     },
   ];
 
-  const fetchSearchItems = async (type) => {
+  const fetchSearchItems = async () => {
+    //Check if the searchQuery has input
+    if (!searchQuery) {
+      return;
+    }
+
+    setHasSearched(true);
     setIsLoading(true);
-    const items = await getSearchItems(type ?? "multi", "James Bond");
-    console.log(items[0]);
+    const items = await getSearchItems(selectedType, searchQuery);
     setSearchedItems(items);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
+    setIsLoading(false);
+    setSearchQuery("");
   };
-
-  useEffect(() => {
-    fetchSearchItems();
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -47,7 +59,13 @@ const SearchContainer = () => {
           Search Movie/TV Show Name
           <Text style={{ color: "red" }}>*</Text>
         </Text>
-        <SearchBar containerStyle={styles.searchBar} />
+
+        <SearchBar
+          containerStyle={styles.searchBar}
+          placeholder="i.e James Bond, CSI"
+          onChangeText={(query) => setSearchQuery(query)}
+          value={searchQuery}
+        />
       </View>
 
       <View style={styles.dropdownContainer}>
@@ -58,16 +76,29 @@ const SearchContainer = () => {
         <View style={styles.dropdownMeta}>
           <View style={{ flex: 1 }}>
             <Dropdown
-              onChange={fetchSearchItems}
+              onChange={(type) => setSelectedType(type)}
               itemList={selectItems}
               defaultSelectedKey="multi"
             />
           </View>
-          <Button> Search </Button>
+
+          <Button
+            buttonStyle={{ backgroundColor: "#31adcd" }}
+            onPress={fetchSearchItems}
+          >
+            {" "}
+            Search{" "}
+          </Button>
         </View>
       </View>
 
-      {isLoading ? (
+      {!hasSearched ? (
+        <View style={styles.initSearchContainer}>
+          <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+            Please initiate a search
+          </Text>
+        </View>
+      ) : isLoading ? (
         <Loading />
       ) : (
         <ItemList data={searchedItems} type="search" />
@@ -108,6 +139,13 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     gap: 8,
+  },
+
+  initSearchContainer: {
+    height: 200,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -99,11 +99,3 @@ const styles = StyleSheet.create({
 });
 
 export default Dropdown;
-//Todo -- Search
-/**
- *
- * Initial Blank State
- *
- * Redirect to single stack
- *
- */

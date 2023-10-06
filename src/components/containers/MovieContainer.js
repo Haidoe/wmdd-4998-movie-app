@@ -44,7 +44,7 @@ const MovieContainer = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.dropdownContainer}>
+      <View>
         <Dropdown
           onChange={fetchMovies}
           itemList={selectItems}
