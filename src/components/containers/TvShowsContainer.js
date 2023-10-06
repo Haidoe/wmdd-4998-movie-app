@@ -3,6 +3,7 @@ import Dropdown from "../dropdown";
 import { getTvShows } from "../../services";
 import { useEffect, useState } from "react";
 import ItemList from "../list/ItemList";
+import Loading from "../Loading";
 
 const TvShowsContainer = () => {
   const [tvShows, setTvShows] = useState([]);
@@ -49,13 +50,7 @@ const TvShowsContainer = () => {
         defaultSelectedKey="popular"
       />
 
-      {isLoading ? (
-        <View>
-          <Text> Loading... </Text>
-        </View>
-      ) : (
-        <ItemList data={tvShows} type="tv" />
-      )}
+      {isLoading ? <Loading /> : <ItemList data={tvShows} type="tv" />}
     </View>
   );
 };

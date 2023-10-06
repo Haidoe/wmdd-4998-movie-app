@@ -3,6 +3,7 @@ import Dropdown from "../dropdown";
 import { getMovies } from "../../services";
 import { useEffect, useState } from "react";
 import ItemList from "../list/ItemList";
+import Loading from "../Loading";
 
 const MovieContainer = () => {
   const [movies, setMovies] = useState([]);
@@ -49,13 +50,7 @@ const MovieContainer = () => {
         defaultSelectedKey="popular"
       />
 
-      {isLoading ? (
-        <View>
-          <Text> Loading... </Text>
-        </View>
-      ) : (
-        <ItemList data={movies} />
-      )}
+      {isLoading ? <Loading /> : <ItemList data={movies} />}
     </View>
   );
 };

@@ -32,7 +32,7 @@ const ItemList = ({ data, type }) => {
           </View>
 
           <View style={styles.itemDetailsContainer}>
-            <Text style={{ fontWeight: "bold" }}>
+            <Text style={{ fontWeight: "bold", width: "80%" }}>
               {item[renderTitleProperty]}
             </Text>
 
@@ -44,7 +44,9 @@ const ItemList = ({ data, type }) => {
 
             <Button
               title="More Details"
-              buttonStyle={{ backgroundColor: "#31adcd", width: "100%" }}
+              buttonStyle={{
+                backgroundColor: "#31adcd",
+              }}
               titleStyle={{ fontSize: 14 }}
             />
           </View>
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
 
   itemDetailsContainer: {
     display: "flex",
+    flex: 1,
     justifyContent: "space-between",
   },
 });
