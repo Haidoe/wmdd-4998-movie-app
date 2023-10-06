@@ -22,6 +22,9 @@ const SearchContainer = ({ navigation }) => {
   //This
   const [selectedType, setSelectedType] = useState("multi");
 
+  //Error
+  const [isError, setIsError] = useState(false);
+
   const selectItems = [
     {
       title: "Movie",
@@ -40,8 +43,11 @@ const SearchContainer = ({ navigation }) => {
   const fetchSearchItems = async () => {
     //Check if the searchQuery has input
     if (!searchQuery) {
+      setIsError(true);
       return;
     }
+
+    setIsError(false);
 
     setHasSearched(true);
     setIsLoading(true);
@@ -55,17 +61,27 @@ const SearchContainer = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <Text style={{ paddingLeft: 8 }}>
+        <Text style={{ marginBottom: 4 }}>
           Search Movie/TV Show Name
           <Text style={{ color: "red" }}>*</Text>
         </Text>
 
         <SearchBar
-          containerStyle={styles.searchBar}
+          containerStyle={{
+            ...styles.searchBar,
+            borderBottomColor: isError ? "red" : "transparent",
+            borderTopColor: isError ? "red" : "transparent",
+            borderColor: isError ? "red" : "transparent",
+            borderWidth: 1,
+          }}
           placeholder="i.e James Bond, CSI"
           onChangeText={(query) => setSearchQuery(query)}
           value={searchQuery}
         />
+
+        {isError ? (
+          <Text style={{ color: "red" }}>Input field required.</Text>
+        ) : null}
       </View>
 
       <View style={styles.dropdownContainer}>
@@ -125,13 +141,12 @@ const styles = StyleSheet.create({
 
   searchBar: {
     backgroundColor: "transparent",
-    borderBottomColor: "transparent",
-    borderTopColor: "transparent",
+    padding: 0,
   },
 
   dropdownContainer: {
-    paddingLeft: 24,
-    paddingRight: 24,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
 
   dropdownMeta: {
