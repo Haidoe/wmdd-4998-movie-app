@@ -1,20 +1,7 @@
 import { Button, Image, Text } from "@rneui/themed";
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 
-const ItemList = ({ data, type }) => {
-  let renderTitleProperty = "";
-
-  switch (type) {
-    case "movie":
-      renderTitleProperty = "title";
-      break;
-    case "tv":
-      renderTitleProperty = "name";
-      break;
-    default:
-      renderTitleProperty = "title";
-  }
-
+const ItemList = ({ data }) => {
   return (
     <FlatList
       data={data}
@@ -33,7 +20,7 @@ const ItemList = ({ data, type }) => {
 
           <View style={styles.itemDetailsContainer}>
             <Text style={{ fontWeight: "bold", width: "80%" }}>
-              {item[renderTitleProperty]}
+              {item.title ?? item.name}
             </Text>
 
             <Text style={{ fontSize: 12 }}>Popularity: {item.popularity}</Text>

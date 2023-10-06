@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import Dropdown from "../dropdown";
-import { getTvShows } from "../../services";
+import { getSearchItems } from "../../services";
 import { useEffect, useState } from "react";
 import ItemList from "../list/ItemList";
 import Loading from "../Loading";
@@ -24,11 +24,11 @@ const SearchContainer = () => {
     },
   ];
 
-  const fetchSearchItems = async (query) => {
+  const fetchSearchItems = async (type) => {
     setIsLoading(true);
-
-    const searchedItems = await getTvShows(query ?? "popular");
-    setSearchedItems(searchedItems);
+    const items = await getSearchItems(type ?? "multi", "James Bond");
+    console.log(items[0]);
+    setSearchedItems(items);
 
     setTimeout(() => {
       setIsLoading(false);
@@ -44,10 +44,14 @@ const SearchContainer = () => {
       <Dropdown
         onChange={fetchSearchItems}
         itemList={selectItems}
-        defaultSelectedKey="popular"
+        defaultSelectedKey="multi"
       />
 
-      {isLoading ? <Loading /> : <ItemList data={searchedItems} type="tv" />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ItemList data={searchedItems} type="search" />
+      )}
     </View>
   );
 };

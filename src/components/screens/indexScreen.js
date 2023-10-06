@@ -4,6 +4,7 @@ import TvShowsContainer from "../containers/TvShowsContainer";
 import { Tab } from "@rneui/themed";
 import { TabView } from "@rneui/base";
 import { useState } from "react";
+import SearchContainer from "../containers/SearchContainer";
 
 const IndexScreen = ({ navigation }) => {
   const [index, setIndex] = useState(0);
@@ -54,8 +55,10 @@ const IndexScreen = ({ navigation }) => {
           <MovieContainer navigation={navigation} />
         </TabView.Item>
 
-        <TabView.Item style={{ backgroundColor: "blue", width: "100%" }}>
-          <Text h1>Favorsite</Text>
+        <TabView.Item
+          style={{ width: "100%", display: "flex", flexDirection: "column" }}
+        >
+          <SearchContainer />
         </TabView.Item>
 
         <TabView.Item
